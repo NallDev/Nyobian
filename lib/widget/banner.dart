@@ -9,7 +9,6 @@ class MyBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width80 = ScreenSize.getWidth(context) * 0.8;
     double height30 = ScreenSize.getHeight(context) * 0.3;
 
     return Container(

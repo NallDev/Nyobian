@@ -9,11 +9,11 @@ class MyRestaurantItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width80 = ScreenSize.getWidth(context) * 0.8;
+    double width90 = ScreenSize.getWidth(context) * 0.9;
     double height20 = ScreenSize.getHeight(context) * 0.2;
 
     return Container(
-      width: width80,
+      width: width90,
       height: height20,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -26,8 +26,8 @@ class MyRestaurantItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              MyTextIcon(text: item.rating.toString(), iconData: Icons.star),
-              MyTextIcon(text: item.city, iconData: Icons.location_city)
+              // MyTextIcon(text: item.rating.toString(), iconData: Icons.star),
+              // MyTextIcon(text: item.city, iconData: Icons.location_city)
             ],
           ),
         ],

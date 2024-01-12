@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/theme/font_style.dart';
 
 class MyTextIcon extends StatelessWidget {
   final String text;
+  final TextStyle? textStyle;
   final IconData iconData;
-
-  const MyTextIcon({Key? key, required this.text, required this.iconData})
-      : super(key: key);
+  final Color? iconColor;
+  const MyTextIcon({Key? key, required this.text, this.textStyle, required this.iconData, this.iconColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +15,13 @@ class MyTextIcon extends StatelessWidget {
       children: <Widget>[
         Icon(
           iconData,
-          color: Colors.grey,
+          color: iconColor ?? Colors.grey,
         ),
-        SizedBox(width: 8),
-        Text(text),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: textStyle ?? myTextTheme.labelLarge,
+        ),
       ],
     );
   }
