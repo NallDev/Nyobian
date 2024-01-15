@@ -37,9 +37,7 @@ class MyBanner extends StatelessWidget {
               style: myTextTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
             ElevatedButton(
-              onPressed: () {
-                onPressed;
-              },
+              onPressed: onPressed,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.pinkAccent,

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/utils/constant.dart';
 
-import '../utils/screen_size.dart';
-
 class MySearch extends StatefulWidget {
-  const MySearch({super.key});
+  final Function(String) onTextChanged;
+  const MySearch({Key? key, required this.onTextChanged}) : super(key: key);
 
   @override
   State<MySearch> createState() => _MySearchState();
@@ -17,7 +16,7 @@ class _MySearchState extends State<MySearch> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: TextFormField(
+      child: TextField(
         controller: _controller,
         decoration: InputDecoration(
             hintText: searchHint,
@@ -37,7 +36,9 @@ class _MySearchState extends State<MySearch> {
                   )
                 : null),
         onChanged: (value) {
-          setState(() {});
+          setState(() {
+            widget.onTextChanged(value);
+          });
         },
       ),
     );
