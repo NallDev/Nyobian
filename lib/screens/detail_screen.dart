@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/theme/font_style.dart';
+import 'package:restaurant_app/utils/constant.dart';
 import 'package:restaurant_app/utils/screen_size.dart';
 import 'package:restaurant_app/widget/list_category.dart';
 import 'package:restaurant_app/widget/text_icon.dart';
@@ -25,38 +26,41 @@ class _MyDetailScreenState extends State<MyDetailScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        physics: ScrollPhysics(),
+        physics: const ScrollPhysics(),
         child: Column(
           children: [
             Stack(
               children: [
-                Image.network(
-                  widget.restaurant.pictureId,
-                  fit: BoxFit.fitWidth,
-                  width: double.infinity,
-                  height: height30,
+                Hero(
+                  tag: widget.restaurant.pictureId,
+                  child: Image.network(
+                    widget.restaurant.pictureId,
+                    fit: BoxFit.fitWidth,
+                    width: double.infinity,
+                    height: height30,
+                  ),
                 ),
-                SafeArea(child: BackButton(color: Colors.pinkAccent),),
+                const SafeArea(child: BackButton(color: Colors.pinkAccent),),
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
                 children: [
-                  SizedBox(height: 16.0,),
+                  const SizedBox(height: 16.0,),
                   Text(
                     widget.restaurant.name,
                     style: myTextTheme.titleMedium?.copyWith(
                         color: Colors.pink),
                   ),
-                  SizedBox(height: 8.0,),
+                  const SizedBox(height: 8.0,),
                   MyTextIcon(text: widget.restaurant.rating.toString(),
                     iconData: Icons.star,
                     iconColor: Colors.yellow,),
-                  SizedBox(height: 8.0,),
+                  const SizedBox(height: 8.0,),
                   MyTextIcon(text: widget.restaurant.city,
                       iconData: Icons.location_city),
-                  SizedBox(height: 8.0,),
+                  const SizedBox(height: 8.0,),
                   Text(
                     widget.restaurant.description,
                     style: myTextTheme.labelSmall?.copyWith(color: Colors.grey),
@@ -70,26 +74,26 @@ class _MyDetailScreenState extends State<MyDetailScreen> {
                       });
                     },
                     child: Text(
-                      'Read More',
+                      readMore,
                       style: myTextTheme.labelSmall?.copyWith(
                           color: Colors.pink),
                     ),
                   ),
                   MyListCategory(image: 'assets/images/drink.jpg',
-                      title: "Drinks",
+                      title: categoryDrink,
                       drink: widget.restaurant.menus.drinks),
-                  SizedBox(height: 8.0,),
+                  const SizedBox(height: 8.0,),
                   MyListCategory(image: 'assets/images/food.png',
-                      title: "Foods",
+                      title: categoryFood,
                       food: widget.restaurant.menus.foods),
-                  SizedBox(height: 8.0,),
+                  const SizedBox(height: 8.0,),
                   ElevatedButton(
-                    onPressed: () => _makePhoneCall("08123456789"),
+                    onPressed: () => _makePhoneCall('123'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.pink,
                       foregroundColor: Colors.white,
                     ),
-                    child: Text("Order Now"),
+                    child: const Text(orderNow),
                   ),
                 ],
               ),

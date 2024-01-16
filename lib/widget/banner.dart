@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 import 'package:restaurant_app/utils/constant.dart';
-import 'package:restaurant_app/utils/screen_size.dart';
 
 class MyBanner extends StatelessWidget {
   final void Function() onPressed;
@@ -9,11 +8,9 @@ class MyBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height30 = ScreenSize.getHeight(context) * 0.3;
-
     return Container(
       width: double.infinity,
-      height: height30,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
         gradient: const LinearGradient(

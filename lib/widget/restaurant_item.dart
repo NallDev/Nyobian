@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/theme/font_style.dart';
-import 'package:restaurant_app/utils/screen_size.dart';
 import 'package:restaurant_app/widget/text_icon.dart';
 
 class MyRestaurantItem extends StatelessWidget {
@@ -14,23 +13,20 @@ class MyRestaurantItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width90 = ScreenSize.getWidth(context) * 0.9;
-    double height30 = ScreenSize.getHeight(context) * 0.3;
-
     return Padding(
-      padding: EdgeInsets.only(top: 8.0),
+      padding: const EdgeInsets.only(top: 8.0),
       child: GestureDetector(
         onTap: onPressed,
         child: Container(
-          width: width90,
-          height: height30,
-          decoration: BoxDecoration(
+          width: double.infinity,
+          height: 200,
+          decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black12,
-                  blurRadius: 16.0, // has the effect of softening the shadow
-                  spreadRadius: 1.0, // has the effect of extending the shadow
+                  blurRadius: 16.0,
+                  spreadRadius: 1.0,
                 )
               ],
               borderRadius: BorderRadius.all(Radius.circular(16))),
@@ -38,18 +34,21 @@ class MyRestaurantItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0)),
-                child: Image.network(
-                  item.pictureId,
-                  fit: BoxFit.fitWidth,
-                  height: height30 / 2,
-                  width: double.infinity,
+                child: Hero(
+                  tag: item.pictureId,
+                  child: Image.network(
+                    item.pictureId,
+                    fit: BoxFit.fitWidth,
+                    height: 100,
+                    width: double.infinity,
+                  ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

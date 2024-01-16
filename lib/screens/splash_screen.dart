@@ -46,7 +46,7 @@ class MySplashScreen extends StatelessWidget {
                   height: size30,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
                     opening,
                     style: myTextTheme.titleMedium,

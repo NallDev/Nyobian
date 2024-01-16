@@ -14,12 +14,12 @@ class MyListCategory extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 8.0,),
+        const SizedBox(height: 8.0,),
         Text(
           title,
           style: myTextTheme.titleSmall?.copyWith(color: Colors.pink),
         ),
-        SizedBox(height: 8.0,),
+        const SizedBox(height: 8.0,),
         SizedBox(
           height: 180,
           child: ListView.separated(
@@ -27,19 +27,19 @@ class MyListCategory extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: food?.length ?? drink?.length ?? 0,
             itemBuilder: (context, index) {
-              return Container(
+              return SizedBox(
                 width: 120,
                 height: 160,
                 child: Column(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                       child: Image.asset(image,
                       height: 140,
                       width: double.infinity,
                       fit: BoxFit.cover,),
                     ),
-                    SizedBox(height: 8.0,),
+                    const SizedBox(height: 8.0,),
                     Text(food?[index].name ?? drink?[index].name ?? "", style: myTextTheme.labelMedium, maxLines: 1, overflow: TextOverflow.ellipsis,)
                   ],
                 ),
