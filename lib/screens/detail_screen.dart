@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/model/restaurant.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 import 'package:restaurant_app/utils/constant.dart';
 import 'package:restaurant_app/utils/screen_size.dart';
-import 'package:restaurant_app/widget/list_category.dart';
 import 'package:restaurant_app/widget/text_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../data/model/search_restaurant_response.dart';
 
 class MyDetailScreen extends StatefulWidget {
   static const routeName = '/detail';
@@ -32,9 +32,9 @@ class _MyDetailScreenState extends State<MyDetailScreen> {
             Stack(
               children: [
                 Hero(
-                  tag: widget.restaurant.pictureId,
+                  tag: 'https://restaurant-api.dicoding.dev/images/medium/${widget.restaurant.pictureId}',
                   child: Image.network(
-                    widget.restaurant.pictureId,
+                    'https://restaurant-api.dicoding.dev/images/medium/${widget.restaurant.pictureId}',
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: height30,
@@ -79,13 +79,13 @@ class _MyDetailScreenState extends State<MyDetailScreen> {
                           color: Colors.pink),
                     ),
                   ),
-                  MyListCategory(image: 'assets/images/drink.jpg',
-                      title: categoryDrink,
-                      drink: widget.restaurant.menus.drinks),
+                  // MyListCategory(image: 'assets/images/drink.jpg',
+                  //     title: categoryDrink,
+                  //     drink: widget.restaurant.menus.drinks),
                   const SizedBox(height: 8.0,),
-                  MyListCategory(image: 'assets/images/food.png',
-                      title: categoryFood,
-                      food: widget.restaurant.menus.foods),
+                  // MyListCategory(image: 'assets/images/food.png',
+                  //     title: categoryFood,
+                  //     food: widget.restaurant.menus.foods),
                   const SizedBox(height: 8.0,),
                   ElevatedButton(
                     onPressed: () => _makePhoneCall('123'),

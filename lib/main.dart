@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/model/restaurant.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/network/api_service.dart';
+import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
 import 'package:restaurant_app/screens/home_screen.dart';
 import 'package:restaurant_app/screens/splash_screen.dart';
 import 'package:restaurant_app/utils/constant.dart';
 
+import 'data/model/search_restaurant_response.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => RestaurantProvider(apiService: ApiService()),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +32,9 @@ class MyApp extends StatelessWidget {
       routes: {
         MySplashScreen.routeName: (context) => const MySplashScreen(),
         MyHomeScreen.routeName: (context) => const MyHomeScreen(),
-        MyDetailScreen.routeName: (context) => MyDetailScreen(restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant)
+        MyDetailScreen.routeName: (context) => MyDetailScreen(
+            restaurant:
+                ModalRoute.of(context)?.settings.arguments as Restaurant)
       },
     );
   }

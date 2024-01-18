@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/model/restaurant.dart';
+import 'package:restaurant_app/data/model/search_restaurant_response.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 import 'package:restaurant_app/widget/text_icon.dart';
 
@@ -38,9 +38,9 @@ class MyRestaurantItem extends StatelessWidget {
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0)),
                 child: Hero(
-                  tag: item.pictureId,
+                  tag: 'https://restaurant-api.dicoding.dev/images/medium/${item.pictureId}',
                   child: Image.network(
-                    item.pictureId,
+                    'https://restaurant-api.dicoding.dev/images/medium/${item.pictureId}',
                     fit: BoxFit.fitWidth,
                     height: 100,
                     width: double.infinity,
