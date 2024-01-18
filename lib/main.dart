@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
+import 'package:restaurant_app/provider/connectivity_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
 import 'package:restaurant_app/screens/home_screen.dart';
@@ -10,8 +11,15 @@ import 'package:restaurant_app/utils/constant.dart';
 import 'data/model/search_restaurant_response.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (_) => RestaurantProvider(apiService: ApiService()),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => RestaurantProvider(apiService: ApiService()),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => ConnectivityProvider(),
+      ),
+    ],
     child: const MyApp(),
   ));
 }

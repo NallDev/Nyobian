@@ -42,7 +42,7 @@ class RestaurantProvider extends ChangeNotifier {
     } catch (exception) {
       _searchState = SearchState.error;
       notifyListeners();
-      return _message = 'Aduch ada error nich -> $exception';
+      return _message = 'Failed when load data';
     }
   }
 
