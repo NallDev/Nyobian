@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
 import 'package:restaurant_app/provider/connectivity_provider.dart';
+import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
 import 'package:restaurant_app/screens/home_screen.dart';
@@ -18,6 +19,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => ConnectivityProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DetailRestaurantProvider(apiService: ApiService()),
       ),
     ],
     child: const MyApp(),

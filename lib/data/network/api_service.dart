@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:restaurant_app/data/model/detail_restaurant_respone.dart';
+import 'package:restaurant_app/data/model/review_restaurant_response.dart';
 
 import '../model/search_restaurant_response.dart';
 
@@ -14,6 +16,34 @@ class ApiService {
       return SearchRestaurantResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception("Failed when load list restaurant");
+    }
+  }
+  
+  Future<DetailRestaurantResponse> detailRestaurant(String id) async {
+    final response = await http.get(Uri.parse("$_baseUrl/detail/$id"));
+
+    if (response.statusCode == 200) {
+      return DetailRestaurantResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception("Failed when load detail restaurant");
+    }
+  }
+  
+  Future<ReviewRestaurantResponse> sendReviewRestaurant(String id, String review) async {
+    var headers = {'Content-Type': 'application/json'};
+    var body = json.encode({
+      'id': id,
+      'name': "Afrinaldi",
+      'review': review,
+    });
+    
+
+    final response = await http.post(Uri.parse("$_baseUrl/review"), headers: headers, body: body);
+
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      return ReviewRestaurantResponse.fromJson(json.decode(response.body));
+    } else {
+      throw "Something error when send review";
     }
   }
 }

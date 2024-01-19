@@ -23,9 +23,9 @@ class RestaurantProvider extends ChangeNotifier {
   List<Restaurant> get allRestaurants => _allRestaurant;
 
   Future<dynamic> _searchRestaurant() async {
+    _searchState = SearchState.loading;
+    notifyListeners();
     try {
-      _searchState = SearchState.loading;
-      notifyListeners();
       final search = await apiService.searchRestaurant(_search);
 
       if(search.restaurants.isNotEmpty) {
