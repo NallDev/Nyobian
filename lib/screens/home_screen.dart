@@ -22,7 +22,9 @@ class MyHomeScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (connectivityProvider.connectivity == ConnectivityResult.none) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(duration: Duration(milliseconds: 500), content: Text("Your connection is losing")),
+          const SnackBar(
+              duration: Duration(milliseconds: 500),
+              content: Text("Your connection is losing")),
         );
       }
     });
@@ -32,41 +34,44 @@ class MyHomeScreen extends StatelessWidget {
           physics: const ScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Consumer<RestaurantProvider>(
-                builder: (context, state, _) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MySearch(
-                        onTextChanged: (value) {
-                          context.read<RestaurantProvider>().searchQuery = value;
-                        },
-                        onClearText: () {
-                          context.read<RestaurantProvider>().searchQuery = '';
-                        },
-                      ),
-                      const SizedBox(height: 16.0),
-                      MyBanner(onPressed: () {
-                        if (state.allRestaurants.isNotEmpty) {
-                          Navigator.pushNamed(context, MyDetailScreen.routeName, arguments: state.searchResult.restaurants[0]);
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(duration: Duration(milliseconds: 500),content: Text("Sorry promo was closed :("))
-                          );
-                        }
-
-                      }),
-                      const SizedBox(height: 16.0),
-                      MyTextIcon(
-                          iconData: Icons.stars,
-                          iconColor: Colors.pinkAccent,
-                          text: nearLocation,
-                          textStyle: myTextTheme.titleSmall),
-                      const SizedBox(height: 16.0,),
-                      _buildList(state)
-                    ],
-                  );
-                }
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MySearch(
+                  onTextChanged: (value) {
+                    context.read<RestaurantProvider>().searchQuery = value;
+                  },
+                  onClearText: () {
+                    context.read<RestaurantProvider>().searchQuery = '';
+                  },
+                ),
+                const SizedBox(height: 16.0),
+                Consumer<RestaurantProvider>(
+                  builder: (context, state, _) {
+                    return MyBanner(onPressed: () {
+                      if (state.allRestaurants.isNotEmpty) {
+                        Navigator.pushNamed(context, MyDetailScreen.routeName,
+                            arguments: state.searchResult.restaurants[0]);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                duration: Duration(milliseconds: 500),
+                                content: Text("Sorry promo was closed :(")));
+                      }
+                    });
+                  },
+                ),
+                const SizedBox(height: 16.0),
+                MyTextIcon(
+                    iconData: Icons.stars,
+                    iconColor: Colors.pinkAccent,
+                    text: nearLocation,
+                    textStyle: myTextTheme.titleSmall),
+                const SizedBox(
+                  height: 16.0,
+                ),
+                _buildList()
+              ],
             ),
           ),
         ),
@@ -74,32 +79,32 @@ class MyHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildList(RestaurantProvider state) {
-    switch (state.searchState) {
-      case SearchState.loading:
-        return const Align(alignment: Alignment.center, child: CircularProgressIndicator());
-      case SearchState.success:
-        return ListView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: state.searchResult.restaurants.length,
-          itemBuilder: (context, index) {
-            return MyRestaurantItem(
-              item: state.searchResult.restaurants[index],
-              onPressed: () {
-                Navigator.pushNamed(
-                    context, MyDetailScreen.routeName,
-                    arguments: state.searchResult.restaurants[index]);
-              },
-            );
-          },
-        );
-      case SearchState.empty:
-        return Align(alignment: Alignment.center, child: Text(state.message));
-      case SearchState.error:
-        return Align(alignment: Alignment.center, child: Text(state.message));
-      default:
-        return const Align(alignment: Alignment.center, child: Text("Unknown Error"));
-    }
+  Widget _buildList() {
+    return Consumer<RestaurantProvider>(builder: (context, state, _) {
+      switch (state.searchState) {
+        case SearchState.loading:
+          return const Align(
+              alignment: Alignment.center, child: CircularProgressIndicator());
+        case SearchState.success:
+          return ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: state.searchResult.restaurants.length,
+            itemBuilder: (context, index) {
+              return MyRestaurantItem(
+                item: state.searchResult.restaurants[index],
+                onPressed: () {
+                  Navigator.pushNamed(context, MyDetailScreen.routeName,
+                      arguments: state.searchResult.restaurants[index]);
+                },
+              );
+            },
+          );
+        case SearchState.empty:
+          return Align(alignment: Alignment.center, child: Text(state.message));
+        case SearchState.error:
+          return Align(alignment: Alignment.center, child: Text(state.message));
+      }
+    });
   }
 }

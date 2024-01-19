@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:restaurant_app/data/model/search_restaurant_response.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
@@ -39,6 +41,10 @@ class RestaurantProvider extends ChangeNotifier {
         return _message = 'No data found';
       }
 
+    } on SocketException {
+      _searchState = SearchState.error;
+      notifyListeners();
+      return _message = 'No Internet Connection';
     } catch (exception) {
       _searchState = SearchState.error;
       notifyListeners();

@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class ConnectivityProvider extends ChangeNotifier {
-  ConnectivityResult _connectivityStatus = ConnectivityResult.none;
+  ConnectivityResult _connectivityStatus = ConnectivityResult.other;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
@@ -18,7 +18,9 @@ class ConnectivityProvider extends ChangeNotifier {
       _connectivityStatus = await _connectivity.checkConnectivity();
       notifyListeners();
     } catch (e) {
-      print("Could not check connectivity status: $e");
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
