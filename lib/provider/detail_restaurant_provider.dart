@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:restaurant_app/data/model/detail_restaurant_respone.dart';
+import 'package:restaurant_app/data/model/detail_restaurant_response.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
+
+import '../utils/constant.dart';
 
 class DetailRestaurantProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -38,11 +40,11 @@ class DetailRestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _detailState = DetailState.error;
       notifyListeners();
-      return _message = 'No Internet Connection';
+      return _message = noInternetMessage;
     } catch (exception) {
       _detailState = DetailState.error;
       notifyListeners();
-      return _message = 'Failed when load data';
+      return _message = failedLoadedData;
     }
   }
 
@@ -57,11 +59,11 @@ class DetailRestaurantProvider extends ChangeNotifier {
     } on SocketException {
       _reviewState = ReviewState.error;
       notifyListeners();
-      return _message = 'No Internet Connection';
+      return _message = noInternetMessage;
     } catch (exception) {
       _reviewState = ReviewState.error;
       notifyListeners();
-      return _message = 'Failed when send review';
+      return _message = failedSendingReview;
     }
   }
 

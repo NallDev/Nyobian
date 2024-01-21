@@ -24,7 +24,7 @@ class MyHomeScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
               duration: Duration(milliseconds: 500),
-              content: Text("Your connection is losing")),
+              content: Text(noInternetMessage)),
         );
       }
     });
@@ -58,7 +58,7 @@ class MyHomeScreen extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 duration: Duration(milliseconds: 500),
-                                content: Text("Sorry promo was closed :(")));
+                                content: Text(promoEndedMessage)));
                       }
                     });
                   },

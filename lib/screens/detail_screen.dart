@@ -126,13 +126,13 @@ class MyDetailScreen extends StatelessWidget {
                                 title: categoryFood,
                                 category: state.detailResult.menus.foods),
                             ListReview(
-                                title: "Last Review",
+                                title: lastReview,
                                 customerReview: state.listReview),
                             const SizedBox(
                               height: 16.0,
                             ),
                             Text(
-                              "Your Review",
+                              yourReview,
                               style: myTextTheme.titleSmall
                                   ?.copyWith(color: Colors.pink),
                             ),
@@ -142,7 +142,7 @@ class MyDetailScreen extends StatelessWidget {
                             TextField(
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                hintText: 'What is about your review?',
+                                hintText: yourReviewDetail,
                               ),
                               onChanged: (value) {
                                 Provider.of<DetailRestaurantProvider>(context,
@@ -169,14 +169,14 @@ class MyDetailScreen extends StatelessWidget {
                                                 duration:
                                                     Duration(milliseconds: 500),
                                                 content: Text(
-                                                    "Please fill your review before send")));
+                                                    emptyReviewMessage)));
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.pink,
                                       foregroundColor: Colors.white,
                                     ),
-                                    child: const Text("Send Review"),
+                                    child: const Text(sendReview),
                                   ),
                             const SizedBox(
                               height: 16.0,

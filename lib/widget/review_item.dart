@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 
-import '../data/model/detail_restaurant_respone.dart';
+import '../data/model/detail_restaurant_response.dart';
 
 class ListReview extends StatelessWidget {
   final List<CustomerReview> customerReview;

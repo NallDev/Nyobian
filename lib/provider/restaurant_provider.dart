@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:restaurant_app/data/model/search_restaurant_response.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
+import 'package:restaurant_app/utils/constant.dart';
 
 class RestaurantProvider extends ChangeNotifier {
   final ApiService apiService;
@@ -38,17 +39,17 @@ class RestaurantProvider extends ChangeNotifier {
       } else {
         _searchState = SearchState.empty;
         notifyListeners();
-        return _message = 'No data found';
+        return _message = noData;
       }
 
     } on SocketException {
       _searchState = SearchState.error;
       notifyListeners();
-      return _message = 'No Internet Connection';
+      return _message = noInternetMessage;
     } catch (exception) {
       _searchState = SearchState.error;
       notifyListeners();
-      return _message = 'Failed when load data';
+      return _message = failedLoadedData;
     }
   }
 
