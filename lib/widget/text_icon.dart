@@ -6,7 +6,13 @@ class MyTextIcon extends StatelessWidget {
   final TextStyle? textStyle;
   final IconData iconData;
   final Color? iconColor;
-  const MyTextIcon({Key? key, required this.text, this.textStyle, required this.iconData, this.iconColor}) : super(key: key);
+  const MyTextIcon(
+      {Key? key,
+      required this.text,
+      this.textStyle,
+      required this.iconData,
+      this.iconColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

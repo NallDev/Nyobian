@@ -7,14 +7,18 @@ class ListReview extends StatelessWidget {
   final List<CustomerReview> customerReview;
   final String title;
 
-  const ListReview({Key? key, required this.title, required this.customerReview}) : super(key: key);
+  const ListReview(
+      {Key? key, required this.title, required this.customerReview})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Text(
           title,
           style: myTextTheme.titleSmall?.copyWith(color: Colors.pink),
@@ -23,14 +27,14 @@ class ListReview extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemBuilder: (_, index) {
-              return _reviewItem(customerReview[index],
+              return _reviewItem(
+                customerReview[index],
               );
             },
             separatorBuilder: (_, index) => const SizedBox(
-              height: 8.0,
-            ),
-            itemCount:
-            customerReview.length > 5 ? 5 : customerReview.length),
+                  height: 8.0,
+                ),
+            itemCount: customerReview.length > 5 ? 5 : customerReview.length),
       ],
     );
   }
@@ -51,8 +55,7 @@ class ListReview extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            const Expanded(
-                child: Icon(Icons.supervised_user_circle)),
+            const Expanded(child: Icon(Icons.supervised_user_circle)),
             Expanded(
                 flex: 3,
                 child: Column(
@@ -60,7 +63,8 @@ class ListReview extends StatelessWidget {
                   children: [
                     Text(
                       item.name,
-                      style: myTextTheme.labelMedium?.copyWith(color: Colors.pinkAccent),
+                      style: myTextTheme.labelMedium
+                          ?.copyWith(color: Colors.pinkAccent),
                     ),
                     const SizedBox(
                       height: 8.0,

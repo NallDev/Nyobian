@@ -19,5 +19,6 @@ const String promoEndedMessage = 'Sorry promo was closed :(';
 const String failedWhenLoadListRestaurant = 'Failed when load list restaurant';
 const String failedLoadedData = 'Failed when load data';
 const String failedSendingReview = 'Failed when send review';
-const String failedLoadedDetailRestaurant = 'Failed when load detail restaurant';
+const String failedLoadedDetailRestaurant =
+    'Failed when load detail restaurant';
 const String myName = 'Afrinaldi';

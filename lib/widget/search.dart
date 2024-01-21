@@ -4,7 +4,9 @@ import 'package:restaurant_app/utils/constant.dart';
 class MySearch extends StatefulWidget {
   final Function(String) onTextChanged;
   final Function() onClearText;
-  const MySearch({Key? key, required this.onTextChanged, required this.onClearText}) : super(key: key);
+  const MySearch(
+      {Key? key, required this.onTextChanged, required this.onClearText})
+      : super(key: key);
 
   @override
   State<MySearch> createState() => _MySearchState();

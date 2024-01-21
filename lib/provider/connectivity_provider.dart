@@ -10,7 +10,8 @@ class ConnectivityProvider extends ChangeNotifier {
 
   ConnectivityProvider() {
     _initConnectivity();
-    _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateStatus);
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateStatus);
   }
 
   Future<void> _initConnectivity() async {

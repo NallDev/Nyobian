@@ -19,7 +19,7 @@ class ApiService {
       throw Exception(failedWhenLoadListRestaurant);
     }
   }
-  
+
   Future<DetailRestaurantResponse> detailRestaurant(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/detail/$id"));
 
@@ -29,17 +29,18 @@ class ApiService {
       throw Exception(failedLoadedDetailRestaurant);
     }
   }
-  
-  Future<ReviewRestaurantResponse> sendReviewRestaurant(String id, String review) async {
+
+  Future<ReviewRestaurantResponse> sendReviewRestaurant(
+      String id, String review) async {
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({
       'id': id,
       'name': myName,
       'review': review,
     });
-    
 
-    final response = await http.post(Uri.parse("$_baseUrl/review"), headers: headers, body: body);
+    final response = await http.post(Uri.parse("$_baseUrl/review"),
+        headers: headers, body: body);
 
     if (response.statusCode >= 200 && response.statusCode <= 299) {
       return ReviewRestaurantResponse.fromJson(json.decode(response.body));

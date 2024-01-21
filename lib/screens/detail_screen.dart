@@ -168,8 +168,8 @@ class MyDetailScreen extends StatelessWidget {
                                             .showSnackBar(const SnackBar(
                                                 duration:
                                                     Duration(milliseconds: 500),
-                                                content: Text(
-                                                    emptyReviewMessage)));
+                                                content:
+                                                    Text(emptyReviewMessage)));
                                       }
                                     },
                                     style: ElevatedButton.styleFrom(

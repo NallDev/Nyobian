@@ -29,7 +29,7 @@ class RestaurantProvider extends ChangeNotifier {
     try {
       final search = await apiService.searchRestaurant(_search);
 
-      if(search.restaurants.isNotEmpty) {
+      if (search.restaurants.isNotEmpty) {
         _searchState = SearchState.success;
         notifyListeners();
         if (_allRestaurant.isEmpty) {
@@ -41,7 +41,6 @@ class RestaurantProvider extends ChangeNotifier {
         notifyListeners();
         return _message = noData;
       }
-
     } on SocketException {
       _searchState = SearchState.error;
       notifyListeners();
@@ -60,4 +59,4 @@ class RestaurantProvider extends ChangeNotifier {
   }
 }
 
-enum SearchState {loading, success, empty, error}
+enum SearchState { loading, success, empty, error }

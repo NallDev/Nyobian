@@ -78,5 +78,6 @@ class DetailRestaurantProvider extends ChangeNotifier {
   }
 }
 
-enum DetailState {loading, success, error}
-enum ReviewState {loading, success, error}
+enum DetailState { loading, success, error }
+
+enum ReviewState { loading, success, error }

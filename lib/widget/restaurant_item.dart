@@ -38,7 +38,8 @@ class MyRestaurantItem extends StatelessWidget {
                     topLeft: Radius.circular(16.0),
                     topRight: Radius.circular(16.0)),
                 child: Hero(
-                  tag: 'https://restaurant-api.dicoding.dev/images/medium/${item.pictureId}',
+                  tag:
+                      'https://restaurant-api.dicoding.dev/images/medium/${item.pictureId}',
                   child: Image.network(
                     'https://restaurant-api.dicoding.dev/images/medium/${item.pictureId}',
                     fit: BoxFit.fitWidth,
@@ -54,13 +55,15 @@ class MyRestaurantItem extends StatelessWidget {
                   children: [
                     Text(
                       item.name,
-                      style: myTextTheme.titleSmall?.copyWith(color: Colors.pink),
+                      style:
+                          myTextTheme.titleSmall?.copyWith(color: Colors.pink),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       item.description,
-                      style: myTextTheme.labelSmall?.copyWith(color: Colors.grey),
+                      style:
+                          myTextTheme.labelSmall?.copyWith(color: Colors.grey),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

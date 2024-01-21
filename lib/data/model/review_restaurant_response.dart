@@ -11,9 +11,11 @@ class ReviewRestaurantResponse {
     required this.customerReviews,
   });
 
-  factory ReviewRestaurantResponse.fromJson(Map<String, dynamic> json) => ReviewRestaurantResponse(
-    error: json["error"],
-    message: json["message"],
-    customerReviews: List<CustomerReview>.from(json["customerReviews"].map((x) => CustomerReview.fromJson(x))),
-  );
+  factory ReviewRestaurantResponse.fromJson(Map<String, dynamic> json) =>
+      ReviewRestaurantResponse(
+        error: json["error"],
+        message: json["message"],
+        customerReviews: List<CustomerReview>.from(
+            json["customerReviews"].map((x) => CustomerReview.fromJson(x))),
+      );
 }

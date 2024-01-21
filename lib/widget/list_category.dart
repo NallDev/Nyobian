@@ -6,19 +6,28 @@ class MyListCategory extends StatelessWidget {
   final String title;
   final List<Category> category;
   final String image;
-  const MyListCategory({Key? key, required this.image ,required this.title, required this.category}) : super(key: key);
+  const MyListCategory(
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.category})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Text(
           title,
           style: myTextTheme.titleSmall?.copyWith(color: Colors.pink),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         SizedBox(
           height: 180,
           child: ListView.separated(
@@ -32,19 +41,31 @@ class MyListCategory extends StatelessWidget {
                 child: Column(
                   children: [
                     ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                      child: Image.asset(image,
-                      height: 140,
-                      width: double.infinity,
-                      fit: BoxFit.cover,),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16.0)),
+                      child: Image.asset(
+                        image,
+                        height: 140,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    const SizedBox(height: 8.0,),
-                    Text(category[index].name, style: myTextTheme.labelMedium, maxLines: 1, overflow: TextOverflow.ellipsis,)
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                    Text(
+                      category[index].name,
+                      style: myTextTheme.labelMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )
                   ],
                 ),
               );
             },
-            separatorBuilder: (context, index) => const SizedBox(width: 16.0,),
+            separatorBuilder: (context, index) => const SizedBox(
+              width: 16.0,
+            ),
           ),
         )
       ],

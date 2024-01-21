@@ -51,7 +51,8 @@ class MyHomeScreen extends StatelessWidget {
                     return MyBanner(onPressed: () {
                       if (state.allRestaurants.isNotEmpty) {
                         Navigator.pushNamed(context, MyDetailScreen.routeName,
-                            arguments: state.searchResult.restaurants[0]).then((_) {
+                                arguments: state.searchResult.restaurants[0])
+                            .then((_) {
                           MyDetailScreen.isLoad = false;
                         });
                       } else {
