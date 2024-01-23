@@ -4,7 +4,8 @@ import 'package:restaurant_app/utils/constant.dart';
 
 class MyBanner extends StatelessWidget {
   final void Function() onPressed;
-  const MyBanner({Key? key, required this.onPressed}) : super(key: key);
+  final bool isSubscribe;
+  const MyBanner({Key? key, required this.onPressed, required this.isSubscribe}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +14,10 @@ class MyBanner extends StatelessWidget {
       height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Colors.pinkAccent, Colors.white],
+          colors: [Colors.pinkAccent, Colors.pinkAccent.shade100],
         ),
       ),
       child: Padding(
@@ -25,24 +26,32 @@ class MyBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              discount,
-              style: myTextTheme.titleLarge?.copyWith(color: Colors.white),
-            ),
-            Text(
-              firstOrder,
-              style: myTextTheme.bodyMedium?.copyWith(color: Colors.white),
-            ),
-            ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.pinkAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+            Flexible(
+              child: Text(
+                subscribeNow,
+                style: myTextTheme.titleLarge?.copyWith(color: Colors.white),
               ),
-              child: const Text(orderNow),
+            ),
+            Flexible(
+              child: Text(
+                subscribeBenefit,
+                style: myTextTheme.bodyMedium?.copyWith(color: Colors.white),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Flexible(
+              child: ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isSubscribe ? Colors.pink[700] : Colors.grey,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text(isSubscribe ? subscribe : unsubscribe),
+              ),
             ),
           ],
         ),

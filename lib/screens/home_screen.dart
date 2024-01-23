@@ -29,6 +29,7 @@ class MyHomeScreen extends StatelessWidget {
       }
     });
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const ScrollPhysics(),
@@ -49,19 +50,8 @@ class MyHomeScreen extends StatelessWidget {
                 Consumer<RestaurantProvider>(
                   builder: (context, state, _) {
                     return MyBanner(onPressed: () {
-                      if (state.allRestaurants.isNotEmpty) {
-                        Navigator.pushNamed(context, MyDetailScreen.routeName,
-                                arguments: state.searchResult.restaurants[0])
-                            .then((_) {
-                          MyDetailScreen.isLoad = false;
-                        });
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                duration: Duration(milliseconds: 500),
-                                content: Text(promoEndedMessage)));
-                      }
-                    });
+
+                    }, isSubscribe: true,);
                   },
                 ),
                 const SizedBox(height: 16.0),

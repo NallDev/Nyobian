@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
+import 'package:restaurant_app/main_screen.dart';
 import 'package:restaurant_app/provider/connectivity_provider.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MySplashScreen.routeName,
       routes: {
+        MainScreen.routeName : (context) => const MainScreen(),
         MySplashScreen.routeName: (context) => const MySplashScreen(),
         MyHomeScreen.routeName: (context) => const MyHomeScreen(),
         MyDetailScreen.routeName: (context) => MyDetailScreen(

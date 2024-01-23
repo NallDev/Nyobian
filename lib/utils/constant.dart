@@ -1,10 +1,11 @@
 const String title = 'My Restaurant';
 const String opening = 'Dining and Delivery Restaurant App';
-const String discount = 'Up to 40% OFF';
+const String subscribeNow = 'Subscribe Now!';
+const String subscribeBenefit = 'You will receive our latest restaurant information';
 const String nearLocation = 'Near your location';
-const String firstOrder = 'on your first order';
 const String noData = 'No data found';
-const String orderNow = 'ORDER NOW';
+const String subscribe = 'Subscribe';
+const String unsubscribe = 'Unsubscribe';
 const String searchHint = 'See Restaurants';
 const String readMore = 'Read More';
 const String categoryDrink = 'Drinks';

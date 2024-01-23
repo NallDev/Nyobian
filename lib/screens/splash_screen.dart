@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/screens/home_screen.dart';
+import 'package:restaurant_app/main_screen.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 import 'package:restaurant_app/utils/constant.dart';
 import 'package:restaurant_app/utils/screen_size.dart';
@@ -23,6 +23,7 @@ class MySplashScreen extends StatelessWidget {
     double size50 = ScreenSize.getWidth(context) * 0.5;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Positioned(
@@ -73,7 +74,7 @@ class MySplashScreen extends StatelessWidget {
   void navigateToHome(BuildContext context) {
     hasNavigated = true;
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, MyHomeScreen.routeName);
+      Navigator.pushReplacementNamed(context, MainScreen.routeName);
     });
   }
 }

@@ -28,6 +28,7 @@ class MyDetailScreen extends StatelessWidget {
 
     final double height30 = ScreenSize.getHeight(context) * 0.3;
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: Column(
@@ -47,6 +48,15 @@ class MyDetailScreen extends StatelessWidget {
                 const SafeArea(
                   child: BackButton(color: Colors.pinkAccent),
                 ),
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: SafeArea(
+                    child: IconButton.filledTonal(onPressed: () {
+                    
+                    }, icon: Icon(Icons.favorite), color: Colors.grey,),
+                  ),
+                )
               ],
             ),
             Padding(
