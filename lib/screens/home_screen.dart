@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/connectivity_provider.dart';
+import 'package:restaurant_app/provider/reminder_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
 import 'package:restaurant_app/theme/font_style.dart';
@@ -28,6 +29,7 @@ class MyHomeScreen extends StatelessWidget {
         );
       }
     });
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SafeArea(
@@ -48,10 +50,15 @@ class MyHomeScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16.0),
-                Consumer<RestaurantProvider>(
+                Consumer<ReminderProvider>(
                   builder: (context, state, _) {
                     return MyBanner(onPressed: () {
+                      if (state.hasPermission) {
 
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please give permission for notification")));
+                        state.requestNotificationPermission();
+                      }
                     }, isSubscribe: true,);
                   },
                 ),

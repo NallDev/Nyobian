@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/local/db_helper.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
@@ -6,16 +10,32 @@ import 'package:restaurant_app/main_screen.dart';
 import 'package:restaurant_app/provider/connectivity_provider.dart';
 import 'package:restaurant_app/provider/db_provider.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
+import 'package:restaurant_app/provider/reminder_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
 import 'package:restaurant_app/screens/home_screen.dart';
 import 'package:restaurant_app/screens/splash_screen.dart';
+import 'package:restaurant_app/utils/background_service.dart';
 import 'package:restaurant_app/utils/constant.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 
 import 'data/model/search_restaurant_response.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+
+  _service.initializeIsolate();
+
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
 
   runApp(MultiProvider(
     providers: [
@@ -30,7 +50,10 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => DbProvider(dbHelper: DbHelper()),
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (_) => ReminderProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
