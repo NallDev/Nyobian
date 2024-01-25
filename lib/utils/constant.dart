@@ -23,3 +23,4 @@ const String failedSendingReview = 'Failed when send review';
 const String failedLoadedDetailRestaurant =
     'Failed when load detail restaurant';
 const String myName = 'Afrinaldi';
+const String myRestaurantFavorites = "My Favorites";

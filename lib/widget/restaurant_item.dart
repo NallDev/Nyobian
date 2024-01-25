@@ -45,6 +45,12 @@ class MyRestaurantItem extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     height: 100,
                     width: double.infinity,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset("assets/images/food.png",
+                        fit: BoxFit.fitWidth,
+                        width: double.infinity,
+                        height: 100,);
+                    },
                   ),
                 ),
               ),

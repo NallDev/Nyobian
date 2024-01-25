@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/db_provider.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/theme/font_style.dart';
 import 'package:restaurant_app/utils/constant.dart';
@@ -23,6 +24,7 @@ class MyDetailScreen extends StatelessWidget {
         isLoad = true;
         Provider.of<DetailRestaurantProvider>(context, listen: false)
             .fetchDetailRestaurant(restaurant.id);
+        Provider.of<DbProvider>(context, listen: false).isFavorite(restaurant.id);
       }
     });
 
@@ -43,6 +45,12 @@ class MyDetailScreen extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     width: double.infinity,
                     height: height30,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset("assets/images/food.png",
+                        fit: BoxFit.fitWidth,
+                        width: double.infinity,
+                        height: height30,);
+                    },
                   ),
                 ),
                 const SafeArea(
@@ -52,9 +60,19 @@ class MyDetailScreen extends StatelessWidget {
                   right: 0,
                   top: 0,
                   child: SafeArea(
-                    child: IconButton.filledTonal(onPressed: () {
-                    
-                    }, icon: Icon(Icons.favorite), color: Colors.grey,),
+                    child: Consumer<DbProvider>(
+                      builder: (context, state, _) {
+                        if (state.isRestaurantFavorite) {
+                          return IconButton.filledTonal(onPressed: () {
+                            Provider.of<DbProvider>(context, listen: false).deleteMyFavorite(restaurant.id);
+                          }, icon: const Icon(Icons.favorite), color: Colors.pinkAccent,);
+                        } else {
+                          return IconButton.filledTonal(onPressed: () {
+                            Provider.of<DbProvider>(context, listen: false).addToFavorite(restaurant);
+                          }, icon: const Icon(Icons.favorite), color: Colors.grey,);
+                        }
+                      },
+                    ),
                   ),
                 )
               ],

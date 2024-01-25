@@ -10,7 +10,7 @@ class DbProvider extends ChangeNotifier {
     _getFavorites();
   }
 
-  late DbState _dbState;
+  DbState _dbState = DbState.empty;
   DbState get dbState => _dbState;
 
   String _message = "";
@@ -18,6 +18,9 @@ class DbProvider extends ChangeNotifier {
 
   List<Restaurant> _favorites = [];
   List<Restaurant> get favorites => _favorites;
+
+  bool _isRestaurantFavorite = false;
+  bool get isRestaurantFavorite => _isRestaurantFavorite;
 
   void _getFavorites() async {
     _favorites = await dbHelper.getRestaurants();
@@ -29,10 +32,16 @@ class DbProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void isFavorite(String id) async {
+    _isRestaurantFavorite = await dbHelper.isRestaurantFavorite(id);
+    notifyListeners();
+  }
+
   void addToFavorite(Restaurant restaurant) async {
     try {
       await dbHelper.insertRestaurant(restaurant);
       _getFavorites();
+      isFavorite(restaurant.id);
     } catch(exception) {
       _dbState = DbState.error;
       _message = "Error when add to my favorite";
@@ -44,6 +53,7 @@ class DbProvider extends ChangeNotifier {
     try {
       await dbHelper.deleteRestaurant(id);
       _getFavorites();
+      isFavorite(id);
     } catch (exception) {
       _dbState = DbState.error;
       _message = "Error when delete my favorite";

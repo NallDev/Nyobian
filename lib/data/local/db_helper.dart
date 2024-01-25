@@ -42,7 +42,7 @@ class DbHelper {
 
   Future<void> insertRestaurant(Restaurant restaurant) async {
     final db = await database;
-    await db!.insert(_tableRestaurants, restaurant.toJson());
+    await db!.insert(_tableRestaurants, restaurant.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Restaurant>> getRestaurants() async {
@@ -50,6 +50,15 @@ class DbHelper {
     List<Map<String, dynamic>> results = await db!.query(_tableRestaurants);
 
     return results.map((e) => Restaurant.fromJson(e)).toList();
+  }
+
+  Future<bool> isRestaurantFavorite(String id) async {
+    final db = await database;
+    List<Map<String, dynamic>> results = await db!.query(_tableRestaurants,
+    where: "id = ?",
+    whereArgs: [id]);
+
+    return results.map((e) => Restaurant.fromJson(e)).toList().isNotEmpty;
   }
 
   Future<void> deleteRestaurant(String id) async {

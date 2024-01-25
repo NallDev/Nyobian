@@ -38,6 +38,7 @@ class MyHomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 16.0,),
                 MySearch(
                   onTextChanged: (value) {
                     context.read<RestaurantProvider>().searchQuery = value;

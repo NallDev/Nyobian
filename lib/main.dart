@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/local/db_helper.dart';
 import 'package:restaurant_app/data/network/api_service.dart';
 import 'package:restaurant_app/main_screen.dart';
 import 'package:restaurant_app/provider/connectivity_provider.dart';
+import 'package:restaurant_app/provider/db_provider.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screens/detail_screen.dart';
@@ -13,6 +15,8 @@ import 'package:restaurant_app/utils/constant.dart';
 import 'data/model/search_restaurant_response.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
@@ -24,6 +28,9 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => DetailRestaurantProvider(apiService: ApiService()),
       ),
+      ChangeNotifierProvider(
+        create: (_) => DbProvider(dbHelper: DbHelper()),
+      )
     ],
     child: const MyApp(),
   ));
@@ -43,7 +50,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: MySplashScreen.routeName,
       routes: {
-        MainScreen.routeName : (context) => const MainScreen(),
+        MainScreen.routeName: (context) => const MainScreen(),
         MySplashScreen.routeName: (context) => const MySplashScreen(),
         MyHomeScreen.routeName: (context) => const MyHomeScreen(),
         MyDetailScreen.routeName: (context) => MyDetailScreen(
