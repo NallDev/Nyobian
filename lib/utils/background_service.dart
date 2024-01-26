@@ -1,4 +1,5 @@
 import 'dart:isolate';
+import 'dart:math';
 import 'dart:ui';
 
 import '../data/network/api_service.dart';
@@ -29,8 +30,13 @@ class BackgroundService {
     print('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService().searchRestaurant("");
-    await notificationHelper.showNotification(
-        flutterLocalNotificationsPlugin, result);
+    var randomInt = Random().nextInt(result.restaurants.length);
+    var content = result.restaurants[randomInt];
+
+    print("PLUGIN + $flutterLocalNotificationsPlugin");
+    print("CONTENT + ${content.name}");
+    await notificationHelper.showNotificationWithAttachment(
+        flutterLocalNotificationsPlugin, content);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);

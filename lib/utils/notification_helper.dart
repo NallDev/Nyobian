@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:restaurant_app/data/model/search_restaurant_response.dart';
-import 'package:rxdart/rxdart.dart';
-
-final selectedNotificationSubject = BehaviorSubject<String>();
+import 'package:http/http.dart' as http;
 
 class NotificationHelper {
   static NotificationHelper? _instance;
@@ -18,60 +18,52 @@ class NotificationHelper {
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingsAndroid =
-    const AndroidInitializationSettings('launch_background');
-
-    var initializationSettingsIOS = const DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-    );
+    const AndroidInitializationSettings('mipmap/ic_launcher');
 
     var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+        android: initializationSettingsAndroid);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: (NotificationResponse details) async {
-          final payload = details.payload;
-          if (payload != null) {
-            print('notification payload: ' + payload);
-          }
-          selectedNotificationSubject.add(payload ?? 'empty payload');
-        });
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings
+    );
   }
 
-  Future<void> showNotification(
+  Future<void> showNotificationWithAttachment(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin,
-      SearchRestaurantResponse restaurant) async {
-    var channelId = "1";
-    var channelName = "channel_01";
-    var channelDescription = "dicoding news channel";
+      Restaurant restaurant) async {
+    var bigPicturePath = await _downloadAndSaveFile(
+        'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+        'banner.jpg');
+
+    var bigPictureAndroidStyle =
+        BigPictureStyleInformation(FilePathAndroidBitmap(bigPicturePath));
 
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        channelId, channelName,
-        channelDescription: channelDescription,
-        importance: Importance.max,
-        priority: Priority.high,
-        ticker: 'ticker',
-        styleInformation: const DefaultStyleInformation(true, true));
+      '1',
+      'channel_restaurant',
+      channelDescription: 'new restaurant information',
+      importance: Importance.high,
+      priority: Priority.high,
+      styleInformation: bigPictureAndroidStyle,
+    );
 
-    var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
-
-    var titleNotification = "<b>Headline News</b>";
-    var titleNews = "title";
+    var notificationDetails = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
 
     await flutterLocalNotificationsPlugin.show(
-        0, titleNotification, titleNews, platformChannelSpecifics,
-        payload: "Hello");
+        1,
+        restaurant.name,
+        'Visit our restaurant in ${restaurant.city} with restaurant rating ${restaurant.rating}',
+        notificationDetails);
   }
 
-  void configureSelectNotificationSubject(String route) {
-    selectedNotificationSubject.stream.listen(
-          (String payload) async {
-        var data = Restaurant.fromJson(json.decode(payload));
-        var article = data;
-      },
-    );
+  Future<String> _downloadAndSaveFile(String url, String fileName) async {
+    var directory = await getApplicationDocumentsDirectory();
+    var filePath = '${directory.path}/$fileName';
+    var response = await http.get(Uri.parse(url));
+    var file = File(filePath);
+    await file.writeAsBytes(response.bodyBytes);
+    return filePath;
   }
 }

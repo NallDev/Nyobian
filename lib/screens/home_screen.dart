@@ -54,7 +54,7 @@ class MyHomeScreen extends StatelessWidget {
                   builder: (context, state, _) {
                     return MyBanner(onPressed: () {
                       if (state.hasPermission) {
-
+                        state.scheduledNews(true);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please give permission for notification")));
                         state.requestNotificationPermission();
