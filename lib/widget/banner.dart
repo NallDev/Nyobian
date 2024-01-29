@@ -44,13 +44,13 @@ class MyBanner extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isSubscribe ? Colors.pink[700] : Colors.grey,
+                  backgroundColor: isSubscribe ? Colors.grey : Colors.pink[700],
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: Text(isSubscribe ? subscribe : unsubscribe),
+                child: Text(isSubscribe ? unsubscribe : subscribe),
               ),
             ),
           ],

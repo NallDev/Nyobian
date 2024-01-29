@@ -52,14 +52,19 @@ class MyHomeScreen extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 Consumer<ReminderProvider>(
                   builder: (context, state, _) {
-                    return MyBanner(onPressed: () {
+                    return MyBanner(onPressed: () async {
+                      await state.requestNotificationPermission();
+                      if (!context.mounted) return;
                       if (state.hasPermission) {
-                        state.scheduledNews(true);
+                        if (state.isSubscriber) {
+                          state.setSubscriber(false);
+                        } else {
+                          state.setSubscriber(true);
+                        }
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please give permission for notification")));
-                        state.requestNotificationPermission();
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please give permission for notification")));
                       }
-                    }, isSubscribe: true,);
+                    }, isSubscribe: state.isSubscriber,);
                   },
                 ),
                 const SizedBox(height: 16.0),
