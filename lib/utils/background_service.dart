@@ -27,14 +27,11 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('Alarm fired!');
     final NotificationHelper notificationHelper = NotificationHelper();
     var result = await ApiService().searchRestaurant("");
     var randomInt = Random().nextInt(result.restaurants.length);
     var content = result.restaurants[randomInt];
 
-    print("PLUGIN + $flutterLocalNotificationsPlugin");
-    print("CONTENT + ${content.name}");
     await notificationHelper.showNotificationWithAttachment(
         flutterLocalNotificationsPlugin, content);
 

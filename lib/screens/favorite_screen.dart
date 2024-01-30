@@ -72,7 +72,7 @@ class MyFavoriteScreen extends StatelessWidget {
           item: favorites[index],
           onPressed: () {
             Navigator.pushNamed(context, MyDetailScreen.routeName,
-                arguments: favorites[index])
+                    arguments: favorites[index])
                 .then((_) {
               MyDetailScreen.isLoad = false;
             });

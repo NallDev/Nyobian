@@ -40,7 +40,9 @@ class MyHomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 16.0,),
+                const SizedBox(
+                  height: 16.0,
+                ),
                 MySearch(
                   onTextChanged: (value) {
                     context.read<RestaurantProvider>().searchQuery = value;
@@ -52,19 +54,25 @@ class MyHomeScreen extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 Consumer<ReminderProvider>(
                   builder: (context, state, _) {
-                    return MyBanner(onPressed: () async {
-                      await state.requestNotificationPermission();
-                      if (!context.mounted) return;
-                      if (state.hasPermission) {
-                        if (state.isSubscriber) {
-                          state.setSubscriber(false);
+                    return MyBanner(
+                      onPressed: () async {
+                        await state.requestNotificationPermission();
+                        if (!context.mounted) return;
+                        if (state.hasPermission) {
+                          if (state.isSubscriber) {
+                            state.setSubscriber(false);
+                          } else {
+                            state.setSubscriber(true);
+                          }
                         } else {
-                          state.setSubscriber(true);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      "Please give permission for notification")));
                         }
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Please give permission for notification")));
-                      }
-                    }, isSubscribe: state.isSubscriber,);
+                      },
+                      isSubscribe: state.isSubscriber,
+                    );
                   },
                 ),
                 const SizedBox(height: 16.0),

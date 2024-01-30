@@ -1,7 +1,8 @@
 const String title = 'My Restaurant';
 const String opening = 'Dining and Delivery Restaurant App';
 const String subscribeNow = 'Subscribe Now!';
-const String subscribeBenefit = 'You will receive our latest restaurant information';
+const String subscribeBenefit =
+    'You will receive our latest restaurant information';
 const String nearLocation = 'Near your location';
 const String noData = 'No data found';
 const String subscribe = 'Subscribe';

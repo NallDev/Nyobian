@@ -42,7 +42,7 @@ class DbProvider extends ChangeNotifier {
       await dbHelper.insertRestaurant(restaurant);
       _getFavorites();
       isFavorite(restaurant.id);
-    } catch(exception) {
+    } catch (exception) {
       _dbState = DbState.error;
       _message = "Error when add to my favorite";
       notifyListeners();
@@ -62,4 +62,4 @@ class DbProvider extends ChangeNotifier {
   }
 }
 
-enum DbState {success, empty, error}
+enum DbState { success, empty, error }

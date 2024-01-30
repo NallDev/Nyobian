@@ -5,7 +5,8 @@ import 'package:restaurant_app/utils/constant.dart';
 class MyBanner extends StatelessWidget {
   final void Function() onPressed;
   final bool isSubscribe;
-  const MyBanner({Key? key, required this.onPressed, required this.isSubscribe}) : super(key: key);
+  const MyBanner({Key? key, required this.onPressed, required this.isSubscribe})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

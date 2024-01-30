@@ -20,14 +20,14 @@ class ReminderProvider extends ChangeNotifier {
   }
 
   Future<void> requestNotificationPermission() async {
-    final PermissionStatus permissionStatus = await Permission.notification.status;
+    final PermissionStatus permissionStatus =
+        await Permission.notification.status;
     if (!permissionStatus.isGranted) {
-      final PermissionStatus requestedStatus = await Permission.notification.request();
-      print(requestedStatus.isGranted);
+      final PermissionStatus requestedStatus =
+          await Permission.notification.request();
       _hasPermission = requestedStatus.isGranted;
       notifyListeners();
     } else {
-      print("run at this ${permissionStatus.isGranted}");
       _hasPermission = true;
       notifyListeners();
     }
@@ -49,15 +49,11 @@ class ReminderProvider extends ChangeNotifier {
 
   Future<void> scheduledInformation(bool value) async {
     if (value) {
-      print('Scheduling News Activated');
       notifyListeners();
       await AndroidAlarmManager.periodic(
-          const Duration(minutes: 1), 1, BackgroundService.callback,
-          startAt: DateTimeHelper.format(),
-      exact: true,
-      wakeup: true);
+          const Duration(hours: 24), 1, BackgroundService.callback,
+          startAt: DateTimeHelper.format(), exact: true, wakeup: true);
     } else {
-      print('Scheduling News Canceled');
       notifyListeners();
       await AndroidAlarmManager.cancel(1);
     }

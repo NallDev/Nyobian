@@ -24,7 +24,8 @@ class MyDetailScreen extends StatelessWidget {
         isLoad = true;
         Provider.of<DetailRestaurantProvider>(context, listen: false)
             .fetchDetailRestaurant(restaurant.id);
-        Provider.of<DbProvider>(context, listen: false).isFavorite(restaurant.id);
+        Provider.of<DbProvider>(context, listen: false)
+            .isFavorite(restaurant.id);
       }
     });
 
@@ -46,10 +47,12 @@ class MyDetailScreen extends StatelessWidget {
                     width: double.infinity,
                     height: height30,
                     errorBuilder: (context, error, stackTrace) {
-                      return Image.asset("assets/images/food.png",
+                      return Image.asset(
+                        "assets/images/food.png",
                         fit: BoxFit.fitWidth,
                         width: double.infinity,
-                        height: height30,);
+                        height: height30,
+                      );
                     },
                   ),
                 ),
@@ -63,13 +66,23 @@ class MyDetailScreen extends StatelessWidget {
                     child: Consumer<DbProvider>(
                       builder: (context, state, _) {
                         if (state.isRestaurantFavorite) {
-                          return IconButton.filledTonal(onPressed: () {
-                            Provider.of<DbProvider>(context, listen: false).deleteMyFavorite(restaurant.id);
-                          }, icon: const Icon(Icons.favorite), color: Colors.pinkAccent,);
+                          return IconButton.filledTonal(
+                            onPressed: () {
+                              Provider.of<DbProvider>(context, listen: false)
+                                  .deleteMyFavorite(restaurant.id);
+                            },
+                            icon: const Icon(Icons.favorite),
+                            color: Colors.pinkAccent,
+                          );
                         } else {
-                          return IconButton.filledTonal(onPressed: () {
-                            Provider.of<DbProvider>(context, listen: false).addToFavorite(restaurant);
-                          }, icon: const Icon(Icons.favorite), color: Colors.grey,);
+                          return IconButton.filledTonal(
+                            onPressed: () {
+                              Provider.of<DbProvider>(context, listen: false)
+                                  .addToFavorite(restaurant);
+                            },
+                            icon: const Icon(Icons.favorite),
+                            color: Colors.grey,
+                          );
                         }
                       },
                     ),
