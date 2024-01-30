@@ -29,11 +29,11 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Icons.home),
-            title: Text("Home"),
+            title: const Text("Home"),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.favorite),
-            title: Text("Favorites"),
+            title: const Text("Favorites"),
           ),
         ],
         selectedItemColor: Colors.pinkAccent,
